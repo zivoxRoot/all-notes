@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Note {
+  id        String    @id @default(uuid())
+  title     String
+  content   String
+  pinned    Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  tagNotes  TagNote[]
+}
+
+model Tag {
+  id       String    @id @default(uuid())
+  name     String
+  tagNotes TagNote[]
+}
+
+model TagNote {
+  id     String @id @default(uuid())
+  noteId String
+  tagId  String
+  note   Note   @relation(fields: [noteId], references: [id])
+  tag    Tag    @relation(fields: [tagId], references: [id])
+
+  @@unique([noteId, tagId])
+}
