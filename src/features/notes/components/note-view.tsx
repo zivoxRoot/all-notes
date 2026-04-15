@@ -120,13 +120,7 @@ const NoteView = ({ id }: { id: string }) => {
           </AlertAction>
         </Alert>
       )}
-      <div className="flex w-full items-center gap-2">
-        <Input
-          className="border-none bg-none text-2xl! font-semibold focus-visible:border-none focus-visible:ring-0"
-          placeholder="Note title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <div className="mx-2 flex gap-2 md:mx-4">
         <Button
           variant={"outline"}
           size={"icon"}
@@ -147,6 +141,12 @@ const NoteView = ({ id }: { id: string }) => {
           )}
         </Button>
       </div>
+      <Input
+        className="border-none bg-none text-2xl! font-semibold focus-visible:border-none focus-visible:ring-0"
+        placeholder="Note title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
       <AutosizeTextarea
         autoFocus
         className="resize-none border-none bg-none focus-visible:ring-0"

@@ -54,8 +54,8 @@ const NoteTrashList = () => {
   if (isLoading) {
     return (
       <div className="grid grid-cols-3 gap-4">
-        {[1, 2, 3, 4, 5].map(() => (
-          <Card>
+        {[1, 2, 3, 4, 5].map((item) => (
+          <Card key={item}>
             <CardHeader>
               <Skeleton className="h-4 w-2/3" />
               <CardAction>
