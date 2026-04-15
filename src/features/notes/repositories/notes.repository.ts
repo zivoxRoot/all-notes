@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma"
-// import { NewNote } from "../schemas/notes.schema"
 
 export const NoteRepository = {
   getAllNotesNonDeleted: () =>
@@ -9,7 +8,10 @@ export const NoteRepository = {
     }),
 
   getDeletedNotes: () =>
-    prisma.note.findMany({ where: { deletedAt: { not: null } } }),
+    prisma.note.findMany({
+      where: { deletedAt: { not: null } },
+      orderBy: { deletedAt: "desc" },
+    }),
 
   getNoteById: (id: string) => prisma.note.findUnique({ where: { id } }),
 
@@ -21,13 +23,6 @@ export const NoteRepository = {
         pinned: false,
       },
     })
-    // return prisma.note.create({
-    //   data: {
-    //     title: note.title,
-    //     content: note.content ?? "",
-    //     pinned: note.pinned ?? false,
-    //   },
-    // })
   },
 
   updateNote: (id: string, title: string, content: string) =>

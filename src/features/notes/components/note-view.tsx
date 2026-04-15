@@ -1,13 +1,24 @@
 "use client"
 
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
 import { AutosizeTextarea } from "@/components/ui/autoresize-textarea"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Home, OctagonAlert } from "lucide-react"
-import Link from "next/link"
+import { ArchiveRestore, OctagonAlert, Pin, PinOff, Trash2 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
-import { useNote, useUpdateNote } from "../hooks/notes.hook"
+import {
+  useNote,
+  usePinNote,
+  useRestoreNote,
+  useUnpinNote,
+  useUpdateNote,
+} from "../hooks/notes.hook"
 
 const NoteView = ({ id }: { id: string }) => {
   // Query
@@ -15,6 +26,9 @@ const NoteView = ({ id }: { id: string }) => {
 
   // Mutations
   const updateNoteMutation = useUpdateNote()
+  const restoreMutation = useRestoreNote()
+  const pinNoteMutation = usePinNote()
+  const unpinNoteMutation = useUnpinNote()
 
   // States
   const [title, setTitle] = useState<string>("")
@@ -30,6 +44,7 @@ const NoteView = ({ id }: { id: string }) => {
   }, [note])
 
   // Debounce the user modifications and mutate DB
+  // TODO: Check if there was modifications ? Check good practice on debounce
   useEffect(() => {
     if (!id) return
 
@@ -57,6 +72,7 @@ const NoteView = ({ id }: { id: string }) => {
     }
   }
 
+  // Loading state
   if (isLoading) {
     return (
       <div className="flex flex-col gap-4 p-4">
@@ -66,6 +82,7 @@ const NoteView = ({ id }: { id: string }) => {
     )
   }
 
+  // Error
   if (error) {
     return (
       <p className="text-destructive">
@@ -75,30 +92,68 @@ const NoteView = ({ id }: { id: string }) => {
     )
   }
 
+  // Note content
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <div className="flex items-center justify-between">
-        <Button asChild className="w-fit">
-          <Link href={"/"}>
-            <Home />
-            Home
-          </Link>
+    <>
+      {note?.deletedAt != null && (
+        <Alert variant={"destructive"}>
+          <Trash2 />
+          <AlertTitle>This note has been trashed</AlertTitle>
+          <AlertDescription>
+            It will be deleted forever in{" "}
+            {Math.max(
+              0,
+              Math.ceil(
+                (new Date(note.deletedAt).getTime() +
+                  30 * 86400000 -
+                  Date.now()) /
+                  86400000
+              )
+            )}{" "}
+            days
+          </AlertDescription>
+          <AlertAction>
+            <Button onClick={() => restoreMutation.mutate(note.id)}>
+              <ArchiveRestore />
+              Restore
+            </Button>
+          </AlertAction>
+        </Alert>
+      )}
+      <div className="flex w-full items-center gap-2">
+        <Input
+          className="border-none bg-none text-2xl! font-semibold focus-visible:border-none focus-visible:ring-0"
+          placeholder="Note title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <Button
+          variant={"outline"}
+          size={"icon"}
+          onClick={() => {
+            note?.pinned
+              ? unpinNoteMutation.mutate(id)
+              : pinNoteMutation.mutate(id)
+          }}
+        >
+          {note?.pinned ? (
+            <>
+              <PinOff />
+            </>
+          ) : (
+            <>
+              <Pin />
+            </>
+          )}
         </Button>
-        {/* <div className="flex items-center gap-2">
-          <Button variant={"destructive"}>Cancel</Button>
-          <Button onClick={handleUpdate}>Update</Button>
-        </div> */}
       </div>
-      <Input
-        className="text-2xl font-semibold"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
       <AutosizeTextarea
+        autoFocus
+        className="resize-none border-none bg-none focus-visible:ring-0"
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
-    </div>
+    </>
   )
 }
 
