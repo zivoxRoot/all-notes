@@ -1,6 +1,5 @@
 "use server"
 
-// import { NewNote, newNoteSchema } from "../schemas/notes.schema"
 import { NotesService } from "../services/notes.service"
 
 type ActionResult<T = void> =
@@ -119,6 +118,19 @@ export async function hardDeleteNoteAction(
       success: false,
       error:
         error instanceof Error ? error.message : "Failed to hard delete a note",
+    }
+  }
+}
+
+export async function wipeTrashAction(): Promise<ActionResult<{}>> {
+  try {
+    await NotesService.wipeTrash()
+    return { success: true, data: {} }
+  } catch (error) {
+    console.error("Wipe trash error:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Wipe trash error",
     }
   }
 }

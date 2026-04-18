@@ -1,14 +1,17 @@
 "use client"
 
+import { Button } from "@/components/ui/button"
 import { SidebarMenuButton } from "@/components/ui/sidebar"
 import { Plus } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useNewNote } from "../hooks/notes.hook"
-import { Button } from "@/components/ui/button"
 
 const NewNote = ({ sidebar }: { sidebar: boolean }) => {
-  const router = useRouter()
+  // Mutations
   const createNoteMutation = useNewNote()
+
+  // State
+  const router = useRouter()
 
   const onClick = async () => {
     const result = await createNoteMutation.mutateAsync()

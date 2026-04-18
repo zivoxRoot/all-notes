@@ -20,7 +20,9 @@ model Note {
 
 model Tag {
   id       String    @id @default(uuid())
-  name     String
+  name     String    @unique
+  color    TagColor  @default(GREEN)
+  icon     TagIcon   @default(STAR)
   tagNotes TagNote[]
 }
 
@@ -28,8 +30,31 @@ model TagNote {
   id     String @id @default(uuid())
   noteId String
   tagId  String
-  note   Note   @relation(fields: [noteId], references: [id])
-  tag    Tag    @relation(fields: [tagId], references: [id])
+  note   Note   @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@unique([noteId, tagId])
+  @@index([noteId])
+  @@index([tagId])
+}
+
+enum TagColor {
+  RED
+  GREEN
+  BLUE
+  BLACK
+  YELLOW
+  PURPLE
+  ORANGE
+  GRAY
+}
+
+enum TagIcon {
+  STAR
+  HEART
+  BOOK
+  CODE
+  CLOCK
+  FLAG
+  TAG
 }

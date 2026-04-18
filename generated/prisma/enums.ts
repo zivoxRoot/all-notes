@@ -9,7 +9,28 @@
 * 🟢 You can import this file directly.
 */
 
+export const TagColor = {
+  RED: 'RED',
+  GREEN: 'GREEN',
+  BLUE: 'BLUE',
+  BLACK: 'BLACK',
+  YELLOW: 'YELLOW',
+  PURPLE: 'PURPLE',
+  ORANGE: 'ORANGE',
+  GRAY: 'GRAY'
+} as const
+
+export type TagColor = (typeof TagColor)[keyof typeof TagColor]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const TagIcon = {
+  STAR: 'STAR',
+  HEART: 'HEART',
+  BOOK: 'BOOK',
+  CODE: 'CODE',
+  CLOCK: 'CLOCK',
+  FLAG: 'FLAG',
+  TAG: 'TAG'
+} as const
+
+export type TagIcon = (typeof TagIcon)[keyof typeof TagIcon]

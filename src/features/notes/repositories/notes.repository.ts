@@ -1,19 +1,45 @@
 import { prisma } from "@/lib/prisma"
 
 export const NoteRepository = {
-  getAllNotesNonDeleted: () =>
-    prisma.note.findMany({
+  getAllNotesNonDeleted: async () => {
+    const notes = await prisma.note.findMany({
       where: { deletedAt: null },
       orderBy: [{ pinned: "desc" }, { updatedAt: "desc" }],
-    }),
+      include: { tagNotes: { include: { tag: true } } },
+    })
 
-  getDeletedNotes: () =>
-    prisma.note.findMany({
+    return notes.map((note) => ({
+      ...note,
+      tags: note.tagNotes.map((tn) => tn.tag),
+    }))
+  },
+
+  getDeletedNotes: async () => {
+    const notes = await prisma.note.findMany({
       where: { deletedAt: { not: null } },
       orderBy: { deletedAt: "desc" },
-    }),
+      include: { tagNotes: { include: { tag: true } } },
+    })
 
-  getNoteById: (id: string) => prisma.note.findUnique({ where: { id } }),
+    return notes.map((note) => ({
+      ...note,
+      tags: note.tagNotes.map((tn) => tn.tag),
+    }))
+  },
+
+  getNoteById: async (id: string) => {
+    const note = await prisma.note.findUnique({
+      where: { id },
+      include: { tagNotes: { include: { tag: true } } },
+    })
+
+    if (!note) return null
+
+    return {
+      ...note,
+      tags: note.tagNotes.map((tn) => tn.tag),
+    }
+  },
 
   newNote: () => {
     return prisma.note.create({
@@ -46,4 +72,7 @@ export const NoteRepository = {
     prisma.note.update({ where: { id }, data: { deletedAt: null } }),
 
   hardDeleteNote: (id: string) => prisma.note.delete({ where: { id } }),
+
+  wipeTrash: () =>
+    prisma.note.deleteMany({ where: { deletedAt: { not: null } } }),
 }

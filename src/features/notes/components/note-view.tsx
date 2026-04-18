@@ -7,9 +7,15 @@ import {
   AlertTitle,
 } from "@/components/ui/alert"
 import { AutosizeTextarea } from "@/components/ui/autoresize-textarea"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
+import AddTagsToNote from "@/features/tags/components/add-tags-to-note"
+import { useRemoveTagFromNote } from "@/features/tags/hooks/tags.hooks"
+import { TAG_BG_COLOR_STYLES } from "@/features/tags/lib/tags-colors"
+import { TAG_ICONS_STYLES } from "@/features/tags/lib/tags-icons"
+import { Tag } from "@/features/tags/schemas/tags.schema"
 import { ArchiveRestore, OctagonAlert, Pin, PinOff, Trash2 } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import {
@@ -29,6 +35,7 @@ const NoteView = ({ id }: { id: string }) => {
   const restoreMutation = useRestoreNote()
   const pinNoteMutation = usePinNote()
   const unpinNoteMutation = useUnpinNote()
+  const removeTagFromNoteMutation = useRemoveTagFromNote()
 
   // States
   const [title, setTitle] = useState<string>("")
@@ -44,7 +51,6 @@ const NoteView = ({ id }: { id: string }) => {
   }, [note])
 
   // Debounce the user modifications and mutate DB
-  // TODO: Check if there was modifications ? Check good practice on debounce
   useEffect(() => {
     if (!id) return
 
@@ -69,6 +75,17 @@ const NoteView = ({ id }: { id: string }) => {
       await updateNoteMutation.mutateAsync({ id, title, content })
     } catch (error) {
       console.error("Note update error:", error)
+    }
+  }
+
+  const handleRemoveTagFromNote = async (tagId: string) => {
+    try {
+      await removeTagFromNoteMutation.mutateAsync({
+        noteId: note?.id ?? "",
+        tagId,
+      })
+    } catch (error) {
+      console.error("Remove tag from note error:", error)
     }
   }
 
@@ -120,7 +137,7 @@ const NoteView = ({ id }: { id: string }) => {
           </AlertAction>
         </Alert>
       )}
-      <div className="mx-2 flex gap-2 md:mx-4">
+      <div className="mx-2 flex items-center gap-2 md:mx-4">
         <Button
           variant={"outline"}
           size={"icon"}
@@ -142,7 +159,7 @@ const NoteView = ({ id }: { id: string }) => {
         </Button>
       </div>
       <Input
-        className="border-none bg-none text-2xl! font-semibold focus-visible:border-none focus-visible:ring-0"
+        className="border-none bg-transparent text-2xl! font-semibold focus-visible:border-none focus-visible:ring-0 dark:bg-transparent"
         placeholder="Note title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -153,6 +170,23 @@ const NoteView = ({ id }: { id: string }) => {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
+      <div className="flex items-center gap-2">
+        {note?.tags.map((tag: Tag) => {
+          const Icon = TAG_ICONS_STYLES[tag.icon]
+
+          return (
+            <Badge
+              key={tag.id}
+              className={`${TAG_BG_COLOR_STYLES[tag.color]}`}
+              onClick={() => handleRemoveTagFromNote(tag.id)}
+            >
+              <Icon />
+              {tag.name}
+            </Badge>
+          )
+        })}
+        <AddTagsToNote note={note!} />
+      </div>
     </>
   )
 }

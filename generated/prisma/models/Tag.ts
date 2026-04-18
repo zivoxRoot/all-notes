@@ -27,16 +27,22 @@ export type AggregateTag = {
 export type TagMinAggregateOutputType = {
   id: string | null
   name: string | null
+  color: $Enums.TagColor | null
+  icon: $Enums.TagIcon | null
 }
 
 export type TagMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  color: $Enums.TagColor | null
+  icon: $Enums.TagIcon | null
 }
 
 export type TagCountAggregateOutputType = {
   id: number
   name: number
+  color: number
+  icon: number
   _all: number
 }
 
@@ -44,16 +50,22 @@ export type TagCountAggregateOutputType = {
 export type TagMinAggregateInputType = {
   id?: true
   name?: true
+  color?: true
+  icon?: true
 }
 
 export type TagMaxAggregateInputType = {
   id?: true
   name?: true
+  color?: true
+  icon?: true
 }
 
 export type TagCountAggregateInputType = {
   id?: true
   name?: true
+  color?: true
+  icon?: true
   _all?: true
 }
 
@@ -132,6 +144,8 @@ export type TagGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type TagGroupByOutputType = {
   id: string
   name: string
+  color: $Enums.TagColor
+  icon: $Enums.TagIcon
   _count: TagCountAggregateOutputType | null
   _min: TagMinAggregateOutputType | null
   _max: TagMaxAggregateOutputType | null
@@ -158,27 +172,35 @@ export type TagWhereInput = {
   NOT?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
   id?: Prisma.StringFilter<"Tag"> | string
   name?: Prisma.StringFilter<"Tag"> | string
+  color?: Prisma.EnumTagColorFilter<"Tag"> | $Enums.TagColor
+  icon?: Prisma.EnumTagIconFilter<"Tag"> | $Enums.TagIcon
   tagNotes?: Prisma.TagNoteListRelationFilter
 }
 
 export type TagOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
   tagNotes?: Prisma.TagNoteOrderByRelationAggregateInput
 }
 
 export type TagWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
   AND?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
   OR?: Prisma.TagWhereInput[]
   NOT?: Prisma.TagWhereInput | Prisma.TagWhereInput[]
-  name?: Prisma.StringFilter<"Tag"> | string
+  color?: Prisma.EnumTagColorFilter<"Tag"> | $Enums.TagColor
+  icon?: Prisma.EnumTagIconFilter<"Tag"> | $Enums.TagIcon
   tagNotes?: Prisma.TagNoteListRelationFilter
-}, "id">
+}, "id" | "name">
 
 export type TagOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
   _count?: Prisma.TagCountOrderByAggregateInput
   _max?: Prisma.TagMaxOrderByAggregateInput
   _min?: Prisma.TagMinOrderByAggregateInput
@@ -190,65 +212,95 @@ export type TagScalarWhereWithAggregatesInput = {
   NOT?: Prisma.TagScalarWhereWithAggregatesInput | Prisma.TagScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Tag"> | string
   name?: Prisma.StringWithAggregatesFilter<"Tag"> | string
+  color?: Prisma.EnumTagColorWithAggregatesFilter<"Tag"> | $Enums.TagColor
+  icon?: Prisma.EnumTagIconWithAggregatesFilter<"Tag"> | $Enums.TagIcon
 }
 
 export type TagCreateInput = {
   id?: string
   name: string
+  color?: $Enums.TagColor
+  icon?: $Enums.TagIcon
   tagNotes?: Prisma.TagNoteCreateNestedManyWithoutTagInput
 }
 
 export type TagUncheckedCreateInput = {
   id?: string
   name: string
+  color?: $Enums.TagColor
+  icon?: $Enums.TagIcon
   tagNotes?: Prisma.TagNoteUncheckedCreateNestedManyWithoutTagInput
 }
 
 export type TagUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.EnumTagColorFieldUpdateOperationsInput | $Enums.TagColor
+  icon?: Prisma.EnumTagIconFieldUpdateOperationsInput | $Enums.TagIcon
   tagNotes?: Prisma.TagNoteUpdateManyWithoutTagNestedInput
 }
 
 export type TagUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.EnumTagColorFieldUpdateOperationsInput | $Enums.TagColor
+  icon?: Prisma.EnumTagIconFieldUpdateOperationsInput | $Enums.TagIcon
   tagNotes?: Prisma.TagNoteUncheckedUpdateManyWithoutTagNestedInput
 }
 
 export type TagCreateManyInput = {
   id?: string
   name: string
+  color?: $Enums.TagColor
+  icon?: $Enums.TagIcon
 }
 
 export type TagUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.EnumTagColorFieldUpdateOperationsInput | $Enums.TagColor
+  icon?: Prisma.EnumTagIconFieldUpdateOperationsInput | $Enums.TagIcon
 }
 
 export type TagUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.EnumTagColorFieldUpdateOperationsInput | $Enums.TagColor
+  icon?: Prisma.EnumTagIconFieldUpdateOperationsInput | $Enums.TagIcon
 }
 
 export type TagCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
 }
 
 export type TagMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
 }
 
 export type TagMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  icon?: Prisma.SortOrder
 }
 
 export type TagScalarRelationFilter = {
   is?: Prisma.TagWhereInput
   isNot?: Prisma.TagWhereInput
+}
+
+export type EnumTagColorFieldUpdateOperationsInput = {
+  set?: $Enums.TagColor
+}
+
+export type EnumTagIconFieldUpdateOperationsInput = {
+  set?: $Enums.TagIcon
 }
 
 export type TagCreateNestedOneWithoutTagNotesInput = {
@@ -268,11 +320,15 @@ export type TagUpdateOneRequiredWithoutTagNotesNestedInput = {
 export type TagCreateWithoutTagNotesInput = {
   id?: string
   name: string
+  color?: $Enums.TagColor
+  icon?: $Enums.TagIcon
 }
 
 export type TagUncheckedCreateWithoutTagNotesInput = {
   id?: string
   name: string
+  color?: $Enums.TagColor
+  icon?: $Enums.TagIcon
 }
 
 export type TagCreateOrConnectWithoutTagNotesInput = {
@@ -294,11 +350,15 @@ export type TagUpdateToOneWithWhereWithoutTagNotesInput = {
 export type TagUpdateWithoutTagNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.EnumTagColorFieldUpdateOperationsInput | $Enums.TagColor
+  icon?: Prisma.EnumTagIconFieldUpdateOperationsInput | $Enums.TagIcon
 }
 
 export type TagUncheckedUpdateWithoutTagNotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.EnumTagColorFieldUpdateOperationsInput | $Enums.TagColor
+  icon?: Prisma.EnumTagIconFieldUpdateOperationsInput | $Enums.TagIcon
 }
 
 
@@ -335,6 +395,8 @@ export type TagCountOutputTypeCountTagNotesArgs<ExtArgs extends runtime.Types.Ex
 export type TagSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  color?: boolean
+  icon?: boolean
   tagNotes?: boolean | Prisma.Tag$tagNotesArgs<ExtArgs>
   _count?: boolean | Prisma.TagCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tag"]>
@@ -342,19 +404,25 @@ export type TagSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type TagSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  color?: boolean
+  icon?: boolean
 }, ExtArgs["result"]["tag"]>
 
 export type TagSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  color?: boolean
+  icon?: boolean
 }, ExtArgs["result"]["tag"]>
 
 export type TagSelectScalar = {
   id?: boolean
   name?: boolean
+  color?: boolean
+  icon?: boolean
 }
 
-export type TagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["tag"]>
+export type TagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "color" | "icon", ExtArgs["result"]["tag"]>
 export type TagInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tagNotes?: boolean | Prisma.Tag$tagNotesArgs<ExtArgs>
   _count?: boolean | Prisma.TagCountOutputTypeDefaultArgs<ExtArgs>
@@ -370,6 +438,8 @@ export type $TagPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    color: $Enums.TagColor
+    icon: $Enums.TagIcon
   }, ExtArgs["result"]["tag"]>
   composites: {}
 }
@@ -796,6 +866,8 @@ export interface Prisma__TagClient<T, Null = never, ExtArgs extends runtime.Type
 export interface TagFieldRefs {
   readonly id: Prisma.FieldRef<"Tag", 'String'>
   readonly name: Prisma.FieldRef<"Tag", 'String'>
+  readonly color: Prisma.FieldRef<"Tag", 'TagColor'>
+  readonly icon: Prisma.FieldRef<"Tag", 'TagIcon'>
 }
     
 

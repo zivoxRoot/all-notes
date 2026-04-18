@@ -682,7 +682,9 @@ export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof Note
 
 export const TagScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  color: 'color',
+  icon: 'icon'
 } as const
 
 export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
@@ -759,6 +761,34 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TagColor'
+ */
+export type EnumTagColorFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TagColor'>
+    
+
+
+/**
+ * Reference to a field of type 'TagColor[]'
+ */
+export type ListEnumTagColorFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TagColor[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TagIcon'
+ */
+export type EnumTagIconFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TagIcon'>
+    
+
+
+/**
+ * Reference to a field of type 'TagIcon[]'
+ */
+export type ListEnumTagIconFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TagIcon[]'>
     
 
 

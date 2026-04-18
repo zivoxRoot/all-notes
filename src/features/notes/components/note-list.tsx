@@ -25,6 +25,9 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty"
 import { Skeleton } from "@/components/ui/skeleton"
+import { TAG_BG_COLOR_STYLES } from "@/features/tags/lib/tags-colors"
+import { TAG_ICONS_STYLES } from "@/features/tags/lib/tags-icons"
+import { Tag } from "@/features/tags/schemas/tags.schema"
 import {
   EllipsisVertical,
   OctagonAlert,
@@ -44,7 +47,10 @@ import { Note } from "../schemas/notes.schema"
 import NewNote from "./new-note"
 
 const NoteList = () => {
+  // Queries
   const { data: notes, isLoading, error } = useNotes()
+
+  // Mutations
   const deleteNoteMutation = useSoftDeleteNote()
   const pinNoteMutation = usePinNote()
   const unpinNoteMutation = useUnpinNote()
@@ -109,7 +115,7 @@ const NoteList = () => {
 
   // Notes list
   return (
-    <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-3 md:p-4 xl:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 p-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
       {notes?.map((note: Note) => (
         <Link href={`/${note.id}`} key={note.id}>
           <Card className="h-full">
@@ -161,15 +167,30 @@ const NoteList = () => {
             <CardContent>
               <p className="truncate">{note.content}</p>
             </CardContent>
-            {note.pinned && (
-              <CardFooter>
+            <CardFooter>
+              <>
                 {note.pinned && (
                   <Badge variant={"secondary"}>
                     <Pin />
                   </Badge>
                 )}
-              </CardFooter>
-            )}
+              </>
+              <div className="flex items-center gap-2">
+                {note.tags.map((tag: Tag) => {
+                  const Icon = TAG_ICONS_STYLES[tag.icon]
+
+                  return (
+                    <Badge
+                      key={tag.id}
+                      className={`${TAG_BG_COLOR_STYLES[tag.color]}`}
+                    >
+                      <Icon />
+                      {tag.name}
+                    </Badge>
+                  )
+                })}
+              </div>
+            </CardFooter>
           </Card>
         </Link>
       ))}

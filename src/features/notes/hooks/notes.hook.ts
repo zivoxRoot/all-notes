@@ -1,16 +1,17 @@
 "use client"
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { NotesClient } from "../clients/notes.client"
 import {
-  softDeleteNoteAction,
-  newNoteAction,
   hardDeleteNoteAction,
-  restoreNoteAction,
+  newNoteAction,
   pinNoteAction,
+  restoreNoteAction,
+  softDeleteNoteAction,
   unpinNoteAction,
   updateNoteAction,
+  wipeTrashAction,
 } from "../actions/notes.actions"
+import { NotesClient } from "../clients/notes.client"
 
 export const noteKeys = {
   all: ["notes"] as const,
@@ -132,6 +133,17 @@ export function useHardDeleteNote() {
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: noteKeys.list("trash") })
       queryClient.invalidateQueries({ queryKey: noteKeys.detail(id) })
+    },
+  })
+}
+
+export function useWipeTrash() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: wipeTrashAction,
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: noteKeys.list("trash") })
     },
   })
 }

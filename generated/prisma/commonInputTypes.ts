@@ -115,6 +115,40 @@ export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
+export type EnumTagColorFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagColor | Prisma.EnumTagColorFieldRefInput<$PrismaModel>
+  in?: $Enums.TagColor[] | Prisma.ListEnumTagColorFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagColor[] | Prisma.ListEnumTagColorFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagColorFilter<$PrismaModel> | $Enums.TagColor
+}
+
+export type EnumTagIconFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagIcon | Prisma.EnumTagIconFieldRefInput<$PrismaModel>
+  in?: $Enums.TagIcon[] | Prisma.ListEnumTagIconFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagIcon[] | Prisma.ListEnumTagIconFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagIconFilter<$PrismaModel> | $Enums.TagIcon
+}
+
+export type EnumTagColorWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagColor | Prisma.EnumTagColorFieldRefInput<$PrismaModel>
+  in?: $Enums.TagColor[] | Prisma.ListEnumTagColorFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagColor[] | Prisma.ListEnumTagColorFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagColorWithAggregatesFilter<$PrismaModel> | $Enums.TagColor
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTagColorFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTagColorFilter<$PrismaModel>
+}
+
+export type EnumTagIconWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagIcon | Prisma.EnumTagIconFieldRefInput<$PrismaModel>
+  in?: $Enums.TagIcon[] | Prisma.ListEnumTagIconFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagIcon[] | Prisma.ListEnumTagIconFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagIconWithAggregatesFilter<$PrismaModel> | $Enums.TagIcon
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTagIconFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTagIconFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -229,6 +263,40 @@ export type NestedIntNullableFilter<$PrismaModel = never> = {
   gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
   not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
+}
+
+export type NestedEnumTagColorFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagColor | Prisma.EnumTagColorFieldRefInput<$PrismaModel>
+  in?: $Enums.TagColor[] | Prisma.ListEnumTagColorFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagColor[] | Prisma.ListEnumTagColorFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagColorFilter<$PrismaModel> | $Enums.TagColor
+}
+
+export type NestedEnumTagIconFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagIcon | Prisma.EnumTagIconFieldRefInput<$PrismaModel>
+  in?: $Enums.TagIcon[] | Prisma.ListEnumTagIconFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagIcon[] | Prisma.ListEnumTagIconFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagIconFilter<$PrismaModel> | $Enums.TagIcon
+}
+
+export type NestedEnumTagColorWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagColor | Prisma.EnumTagColorFieldRefInput<$PrismaModel>
+  in?: $Enums.TagColor[] | Prisma.ListEnumTagColorFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagColor[] | Prisma.ListEnumTagColorFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagColorWithAggregatesFilter<$PrismaModel> | $Enums.TagColor
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTagColorFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTagColorFilter<$PrismaModel>
+}
+
+export type NestedEnumTagIconWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagIcon | Prisma.EnumTagIconFieldRefInput<$PrismaModel>
+  in?: $Enums.TagIcon[] | Prisma.ListEnumTagIconFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagIcon[] | Prisma.ListEnumTagIconFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagIconWithAggregatesFilter<$PrismaModel> | $Enums.TagIcon
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTagIconFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTagIconFilter<$PrismaModel>
 }
 
 

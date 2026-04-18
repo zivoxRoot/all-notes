@@ -87,7 +87,9 @@ export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof Note
 
 export const TagScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  color: 'color',
+  icon: 'icon'
 } as const
 
 export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]

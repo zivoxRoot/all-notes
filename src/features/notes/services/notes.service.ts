@@ -1,5 +1,4 @@
 import { NoteRepository } from "../repositories/notes.repository"
-// import { NewNote } from "../schemas/notes.schema"
 
 export const NotesService = {
   async getAllNotesNonDeleted() {
@@ -22,9 +21,6 @@ export const NotesService = {
     return NoteRepository.unpinNote(id)
   },
 
-  //   async newNote(note: NewNote) {
-  //     return NoteRepository.newNote(note)
-  //   },
   async newNote() {
     return NoteRepository.newNote()
   },
@@ -43,5 +39,9 @@ export const NotesService = {
 
   async hardDeleteNote(id: string) {
     return NoteRepository.hardDeleteNote(id)
+  },
+
+  async wipeTrash() {
+    return NoteRepository.wipeTrash()
   },
 }

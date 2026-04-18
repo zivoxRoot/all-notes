@@ -19,6 +19,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar"
+import TagsSidebarList from "@/features/tags/components/tags-sidebar-list"
 
 const AppSidebar = () => {
   return (
@@ -36,6 +37,9 @@ const AppSidebar = () => {
           <SidebarMenu>
             <SidebarLinks />
           </SidebarMenu>
+        </SidebarGroup>
+        <SidebarGroup>
+          <TagsSidebarList />
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
